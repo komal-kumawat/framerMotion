@@ -4,7 +4,7 @@
 
 import { X, CheckCircle, Star, Heart, Zap } from "lucide-react";
 import car from "../assets/car.png"
-import { useMotionValueEvent, useScroll, useTransform , motion } from "motion/react";
+import { useMotionValueEvent, useScroll, useTransform, motion, useMotionTemplate, useSpring } from "motion/react";
 import { useRef } from "react";
 type Feature = {
     icon: React.ReactNode;
@@ -72,6 +72,48 @@ export const features: Feature[] = [
                 />
             </div>
         ),
+    }, 
+    {
+        icon: <CheckCircle className="h-6 w-6 text-blue-500" />,
+        title: "Fast Performance",
+        description: "Our app runs lightning fast",
+        content: (
+            <div className="w-full h-60  bg-gray-800 flex items-center justify-center rounded-lg overflow-hidden">
+                <img
+                    src={car}
+                    alt="Fast Performance"
+                    className="object-cover w-full h-full"
+                />
+            </div>
+        ),
+    },
+     {
+        icon: <CheckCircle className="h-6 w-6 text-blue-500" />,
+        title: "Fast Performance",
+        description: "Our app runs lightning fast",
+        content: (
+            <div className="w-full h-60  bg-gray-800 flex items-center justify-center rounded-lg overflow-hidden">
+                <img
+                    src={car}
+                    alt="Fast Performance"
+                    className="object-cover w-full h-full"
+                />
+            </div>
+        ),
+    }, 
+    {
+        icon: <CheckCircle className="h-6 w-6 text-blue-500" />,
+        title: "Fast Performance",
+        description: "Our app runs lightning fast",
+        content: (
+            <div className="w-full h-60  bg-gray-800 flex items-center justify-center rounded-lg overflow-hidden">
+                <img
+                    src={car}
+                    alt="Fast Performance"
+                    className="object-cover w-full h-full"
+                />
+            </div>
+        ),
     },
 
 ];
@@ -97,21 +139,27 @@ const Card = ({ feature }: { feature: Feature }) => {
     // useMotionValueEvent(scrollYProgress , "change" , (latest)=>{
     //     console.log("change values" ,latest )
     // })
-    const translateContent = useTransform(scrollYProgress , [0,1] , [-200,200]);
-    const opacityContent = useTransform(scrollYProgress , [0, 0.5, 1] , [0,1,0]);
-    
+    const translateContent = useSpring(useTransform(scrollYProgress, [0, 1], [200, -300]),
+{
+    stiffness:100,
+    damping:30,
+    mass:1
+});
+    const opacityContent = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
+    const blur = useTransform(scrollYProgress, [0.5, 1], [0, 10]);
+    const scale = useTransform(scrollYProgress, [0.5, 1], [1, 0.8])
     return <div
-        ref = {ref}
-        key={feature.title} 
+        ref={ref}
+        key={feature.title}
         className="grid grid-cols-2 gap-10 py-40">
-        <motion.div className="flex flex-col gap-5  justify-center" style={{opacity:opacityContent}}>
+        <motion.div className="flex flex-col gap-5  justify-center" style={{ scale, filter: useMotionTemplate`blur(${blur}px)` }}>
             {feature.icon}
             <h2 className="font-bold text-white text-2xl">{feature.title}</h2>
             <p className="text-gray-400 ">{feature.description}</p>
         </motion.div>
         <motion.div style={{
-            y:translateContent,
-            opacity:opacityContent
+            y: translateContent,
+            opacity: opacityContent
         }}>{feature.content}</motion.div>
     </div>
 }
