@@ -2,7 +2,7 @@
 
 "use client";
 
-import { X, CheckCircle, Star, Heart, Zap } from "lucide-react";
+import { CheckCircle, Star, Heart, Zap } from "lucide-react";
 import car from "../assets/car.png"
 import { useMotionValueEvent, useScroll, useTransform, motion, useMotionTemplate, useSpring } from "motion/react";
 import { useRef, useState } from "react";
