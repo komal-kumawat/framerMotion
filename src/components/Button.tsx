@@ -11,10 +11,13 @@ const Button = () => {
             //     ease:"easeInOut"
             // }}
             whileHover={{
-                rotateX:20,
+                rotateX:25,
                 rotateY:10,
-                boxShadow:"0px 20px 50px rgba(8 , 112 , 184 , 0.7"
-
+                boxShadow:"0px 20px 50px rgba(8 , 112 , 184 , 0.7",
+                y:-5
+            }}
+            whileTap={{
+                y:0
             }}
             style={{
                 translateZ:100,   //for 3d effect
