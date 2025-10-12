@@ -5,7 +5,7 @@
 import { X, CheckCircle, Star, Heart, Zap } from "lucide-react";
 import car from "../assets/car.png"
 import { useMotionValueEvent, useScroll, useTransform, motion, useMotionTemplate, useSpring } from "motion/react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 type Feature = {
     icon: React.ReactNode;
     title: string;
@@ -72,7 +72,7 @@ export const features: Feature[] = [
                 />
             </div>
         ),
-    }, 
+    },
     {
         icon: <CheckCircle className="h-6 w-6 text-blue-500" />,
         title: "Fast Performance",
@@ -87,7 +87,7 @@ export const features: Feature[] = [
             </div>
         ),
     },
-     {
+    {
         icon: <CheckCircle className="h-6 w-6 text-blue-500" />,
         title: "Fast Performance",
         description: "Our app runs lightning fast",
@@ -100,7 +100,7 @@ export const features: Feature[] = [
                 />
             </div>
         ),
-    }, 
+    },
     {
         icon: <CheckCircle className="h-6 w-6 text-blue-500" />,
         title: "Fast Performance",
@@ -119,14 +119,33 @@ export const features: Feature[] = [
 ];
 
 const MotionHooks = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    });
+    const backgrounds = ["#343434", "#00193b", "#05291c"];
+    const [background, setBackground] = useState(backgrounds[0]);
+    useMotionValueEvent(scrollYProgress, "change", (latest) => {
+        const finalValue = Math.floor(latest * backgrounds.length);
+        setBackground(backgrounds[finalValue]);
+        console.log("latest->", finalValue);
+    })
     return (
-        <div className="min-h-screen flex items-center justify-center bg-neutral-900 px-10 ">
+        <motion.div
+            ref={containerRef}
+            animate={{ background }}
+            transition={{
+                "ease":"easeInOut",
+                "duration":0.8
+            }}
+            className="min-h-screen flex items-center justify-center bg-neutral-900 px-10 ">
             <div className="flex flex-col gap-40 py-40">
                 {features.map((feature, idx) =>
-                    <Card key={feature.title} feature={feature} />
+                    <Card key={feature.title+idx} feature={feature} />
                 )}
             </div>
-        </div>
+        </motion.div>
     )
 }
 
@@ -140,11 +159,11 @@ const Card = ({ feature }: { feature: Feature }) => {
     //     console.log("change values" ,latest )
     // })
     const translateContent = useSpring(useTransform(scrollYProgress, [0, 1], [200, -300]),
-{
-    stiffness:100,
-    damping:30,
-    mass:1
-});
+        {
+            stiffness: 100,
+            damping: 30,
+            mass: 1
+        });
     const opacityContent = useTransform(scrollYProgress, [0, 0.5, 1], [0, 1, 0]);
     const blur = useTransform(scrollYProgress, [0.5, 1], [0, 10]);
     const scale = useTransform(scrollYProgress, [0.5, 1], [1, 0.8])
