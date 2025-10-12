@@ -1,4 +1,5 @@
 import "./App.css";
+import Navbar from "./components/Navbar";
 import Layout from "./pages/Layout-cards";
 // import CardContent from "./pages/CardContent";
 // import DottedPage from "./pages/DottedPage";
@@ -10,7 +11,8 @@ function App() {
       {/* <DottedPage/> */}
       {/* <CardContent/> */}
       {/* <MotionHooks /> */}
-      <Layout/>
+      {/* <Layout/> */}
+      <Navbar/>
     </div>
   )
 }
