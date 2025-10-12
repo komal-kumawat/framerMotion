@@ -20,6 +20,13 @@ export const cards: Card[] = [
         content: (
             <p className="text-gray-400">
                 Zapier lets you automate workflows by connecting 6,000+ apps without writing code.
+                Zapier lets you automate workflows by connecting 6,000+ apps without writing code.
+                Zapier lets you automate workflows by connecting 6,000+ apps without writing code.
+                Zapier lets you automate workflows by connecting 6,000+ apps without writing code.
+                Zapier lets you automate workflows by connecting 6,000+ apps without writing code.
+                Zapier lets you automate workflows by connecting 6,000+ apps without writing code.
+                Zapier lets you automate workflows by connecting 6,000+ apps without writing code.
+
             </p>
         ),
     },
@@ -112,14 +119,16 @@ const Layout = () => {
                 <motion.div
                     layoutId={`card-${current.title}`}
                     ref={ref}
-                    className="h-[600px] w-90  rounded-2xl border border-neutral-200 p-4 flex flex-col justify-center items-center fixed z-100 bg-gray-100 overflow-hidden">
-                    <motion.img layoutId={`card-image-${current.title}`} src={current.src} alt={current.title} className="h-60 rounded-xl aspect-square" />
+                    className="h-[600px] w-90  rounded-2xl border border-neutral-200 p-4 flex flex-col justify-center items-center absolute z-100 bg-gray-100 overflow-hidden">
+                    <motion.img layoutId={`card-image-${current.title}`} src={current.src} alt={current.title} className="h-60 w-full rounded-xl aspect-square" />
                     <motion.div layoutId={`card-comp-${current.title}`} className="flex justify-content items-center  flex-col">
                         <motion.div className="flex gap-4 items-center gap-10 p-2" >
                             <motion.div layoutId={`card-h2p-${current.title}`} className="flex flex-col items-center justify-between gap-2 p-5">
                                 <motion.h2 layoutId={`card-h2-${current.title}`} className="font-bold text-lg text-black">{current.title}</motion.h2>
                                 <motion.p layoutId={`card-p-${current.title}`} className="text-[15px] text-neutral-500">{current.description}</motion.p>
                             </motion.div>
+                        <motion.a layoutId={`card-a-${current.title}`} href={current.ctaLink} className="px-2 py-1 bg-green-500 rounded-lg text-white text-[15px]">{current.ctaText}</motion.a>
+
                         </motion.div>
                         <motion.div
                             initial={{
@@ -134,10 +143,11 @@ const Layout = () => {
                                 duration:0.5,
                                 ease:"easeInOut"
                             }}
-                            className="p-5 overflow-auto">
+                            className="p-5 h-50 pb-20 overflow-auto [mask-image:linear-gradient(to_top,transparent_20%,rgba(0,0,0,0.8)_50%)]"
+                            >
+
                             {current.content}
                         </motion.div>
-                        <motion.a layoutId={`card-a-${current.title}`} href={current.ctaLink} className="px-2 py-1 bg-green-500 rounded-lg text-white text-[15px]">{current.ctaText}</motion.a>
 
                     </motion.div>
                 </motion.div>
