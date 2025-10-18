@@ -5,9 +5,9 @@ const AnimatedText = () => {
     const [scope, animate] = useAnimate();
     const text = "I’m passionate about turning ideas into reality through code. With a strong foundation in software development and a creative approach to problem-solving, I strive to build projects that make a meaningful impact."
     
-    useEffect(()=>{
-        startAnimating();
-    } , [])
+    // useEffect(()=>{
+    //     startAnimating();
+    // } , [])
 
     const startAnimating = ()=>{
         "span"
@@ -25,7 +25,7 @@ const AnimatedText = () => {
         <div
             ref={scope}
 
-            className="text-white max-w-4xl mx-auto font-bold text-2xl">
+            className="text-white max-w-2xl mx-auto font-bold text-2xl">
             {/* <motion.span
                 style={{
                     opacity:0
@@ -35,6 +35,8 @@ const AnimatedText = () => {
             {text}
 
             </motion.span> */}
+
+            <button onClick={startAnimating} className="bg-neutral-800 px-4 py-2 rounded-md cursor-pointer active:scale-110 mr-5 transition duration-200"> What is FC</button>
             {text.split(" ").map((word , idx)=>(
                 <motion.span
                     style={{
@@ -43,7 +45,7 @@ const AnimatedText = () => {
                        y:10,
                     }}
                     key={word+idx}
-                    className="inline-block"
+                    className="inline-block "
                 >
                     {word} &nbsp;
                 </motion.span>
